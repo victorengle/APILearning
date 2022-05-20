@@ -20,6 +20,16 @@ def create_posts(user: schemas.PostUsers, db: Session = Depends(get_db)):
     return newuser
 
 
+@router.get("/", response_model=List[schemas.UserResponse])
+def get_all_users(db: Session = Depends(get_db)):
+
+    userdetail = db.query(models.User).all()
+    # if not userdetail:
+    #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+    #                         detail="No Users Found In Database")
+    return userdetail
+
+
 @router.get("/{id}", response_model=schemas.UserResponse)
 def get_user_id(id: int, db: Session = Depends(get_db)):
 
