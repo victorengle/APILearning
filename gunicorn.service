@@ -1,0 +1,14 @@
+[Unit]
+Description=APIlearning 
+After=network.target
+
+[Service]
+User=Victor
+Group=Victor
+WorkingDirectory=/home/Victor/App/src/
+Environment="PATH=/home/Victor/App/venvapilearn/bin"
+EnvironmentFile=/home/Victor/.env
+ExecStart=/home/V/app/venv/bin/gunicorn -w 2 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
