@@ -34,4 +34,4 @@ app.include_router(votes.router)
 
 @app.get("/")
 def gethello():
-    return {"Message": "Hello"}
+    return {"Message": "Hello World!"}
