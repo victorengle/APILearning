@@ -1,31 +1,28 @@
-version : "2"
+version : "3"
 services:
   postgres:
       image: postgres
       environment:
-        - POSTGRES_PASSWORD=dontforget12
-        - POSTGRES_DB=APILearning
+        - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+        - POSTGRES_DB=${DATABASE_NAME}
       volumes:
         - postgres-db:/var/lib/postgresql/data
   api:
-    build: .
-    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
-    volumes:
-      - ./:/usr/src/app:ro
+    image: bond001/apilearning
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"
     ports:
-      - 8000:8000
+      - 80:8000
     environment:
-      - DATABASE_HOSTNAME=postgres
-      - DATABASE_NAME=APILearning
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_PASSWORD=dontforget12
-      - SECRET_KEY=8c170a75ef0f564b9eeb9fa4f2f215e6288548d4c9200d0b7c0ec0094a4fb124
-      - ALGORITHM=HS256
-      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+      - DATABASE_HOSTNAME=${DATABASE_HOSTNAME}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
     depends_on:
-      - postgres
-  
+      - postgres  
 volumes:
     postgres-db:
 
