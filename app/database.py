@@ -13,7 +13,7 @@ from .config import settings
 SQLALCHEMY_DATABSE_URL = f'postgresql://{settings.Database_Username}:{settings.Database_Password}@{settings.Database_Hostname}:{settings.Database_Port}/{settings.Database_Name}'
 
 
-engine = create_engine(SQLALCHEMY_DATABSE_URL, )
+engine = create_engine(SQLALCHEMY_DATABSE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
