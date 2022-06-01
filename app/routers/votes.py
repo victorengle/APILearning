@@ -17,6 +17,10 @@ def vote(vote: schemas.CreateVote, db: Session = Depends(get_db),  get_curr_user
     postquery = db.query(models.Post).filter(
         models.Post.Id == vote.Post_Id)
 
+    user_posts = db.query(models.Post).filter(models.Post.Id == vote.Post_Id,
+                                              models.Post.User_Id == get_curr_user.Id)
+
+    user_posts_found = user_posts.first()
     found_post = postquery.first()
     found_vote = vote_query.first()
 
@@ -29,6 +33,9 @@ def vote(vote: schemas.CreateVote, db: Session = Depends(get_db),  get_curr_user
             raise HTTPException(status_code=status.HTTP_409_CONFLICT,
                                 detail=f"User {get_curr_user.Id} Already Has A Vote On This Post")
         new_vote = models.Vote(Post_Id=vote.Post_Id, User_Id=get_curr_user.Id)
+        if(user_posts_found):
+            raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE,
+                                detail=f"User Not Allowed To Vote On Their Own Post")
         db.add(new_vote)
         db.commit()
 

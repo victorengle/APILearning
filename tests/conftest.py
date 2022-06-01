@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.oauth2 import create_access_token
+from app import models
 import pytest
 
 SQLALCHEMY_DATABSE_URL = f'postgresql://{settings.Database_Username}:{settings.Database_Password}@{settings.Database_Hostname}:{settings.Database_Port}/{settings.Database_Name}_Test'
@@ -78,8 +79,18 @@ def test_createuser(client):
 
 
 @pytest.fixture
-def token(test_user):
-    return create_access_token({"user_id": test_user['id']})
+def test_createuser2(client):
+    user_data = {"Email": "ert123@gmail.com", "Password": "password123"}
+    res = client.post("/sqlalchemy/users/", json=user_data)
+    assert res.status_code == 201
+    new_user = res.json()
+    new_user['Password'] = user_data['Password']
+    return new_user
+
+
+@pytest.fixture
+def token(test_createuser):
+    return create_access_token({"user_id": test_createuser['Id']})
 
 
 @pytest.fixture
@@ -88,5 +99,48 @@ def authorized_client(client, token):
         **client.headers,
         "Authorization": f"Bearer {token}"
     }
-
     return client
+
+
+@pytest.fixture
+def test_posts(test_createuser, session, test_createuser2):
+    posts_data = [{
+        "Title": "first title",
+        "Content": "first content",
+        "User_Id": test_createuser['Id']
+    }, {
+        "Title": "2nd title",
+        "Content": "2nd content",
+        "User_Id": test_createuser['Id']
+    },
+        {
+        "Title": "3rd title",
+        "Content": "3rd content",
+        "User_Id": test_createuser['Id']
+    },
+        {
+        "Title": "4th title",
+        "Content": "4th content",
+        "User_Id": test_createuser2['Id']
+    }]
+
+    def create_post_model(post):
+        return models.Post(**post)
+
+    post_map = map(create_post_model, posts_data)
+    posts = list(post_map)
+
+    session.add_all(posts)
+    # session.add_all([models.Post(title="first title", content="first content", owner_id=test_user['id']),
+    #                 models.Post(title="2nd title", content="2nd content", owner_id=test_user['id']), models.Post(title="3rd title", content="3rd content", owner_id=test_user['id'])])
+    session.commit()
+    posts = session.query(models.Post).all()
+    return posts
+
+
+@pytest.fixture()
+def test_vote(test_posts, session, test_createuser):
+    new_vote = models.Vote(
+        Post_Id=test_posts[3].Id, User_Id=test_createuser['Id'])
+    session.add(new_vote)
+    session.commit()

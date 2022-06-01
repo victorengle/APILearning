@@ -34,6 +34,7 @@ class PostCreate(PostBase):
 class PostResponse(PostBase):
     Id: str
     Created_At: datetime
+    User_Id: int
     Owner: UserResponse
 
     class Config:

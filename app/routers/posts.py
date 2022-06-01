@@ -15,7 +15,7 @@ router = APIRouter(prefix="/sqlalchemy", tags=["Posts"])
 # Filter.'Contains' is another QUERY parameter that allows users to search for keywords
 # On the url, %20 represents a ' ' (space)
 @router.get("/getall", response_model=List[schemas.PostResponse])
-def get_posts(db: Session = Depends(get_db), limit: int = 10, skip: int = 0, search: Optional[str] = ""):
+def get_posts(db: Session = Depends(get_db), get_curr_user: int = Depends(oauth2.get_current_user), limit: int = 10, skip: int = 0, search: Optional[str] = ""):
     posts = db.query(models.Post).filter(
         models.Post.Title.contains(search)).limit(limit).offset(skip).all()
     print(posts)
