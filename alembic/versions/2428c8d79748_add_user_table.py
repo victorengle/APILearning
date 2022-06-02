@@ -18,7 +18,7 @@ depends_on = None
 
 def upgrade():
     op.create_table('Users', sa.Column('Id', sa.Integer(), nullable=False),
-                    sa.Column('Email', sa.String(), nullable=False), sa.Column('Password', sa.String(), nullable=False), sa.Column('Created_At', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False), sa.PrimaryKeyConstraint('Id'), sa.UniqueConstraint('Email'))
+                    sa.Column('Email', sa.String(400), nullable=False), sa.Column('Password', sa.String(), nullable=False), sa.Column('Created_At', sa.DateTime(timezone=True), server_default=sa.text('GETDATE()'), nullable=False), sa.PrimaryKeyConstraint('Id'), sa.UniqueConstraint('Email'))
 
 
 def downgrade():

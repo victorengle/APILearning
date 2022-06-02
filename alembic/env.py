@@ -9,7 +9,8 @@ from app.config import settings
 # access to the values within the .ini file in use.
 config = context.config
 config.set_main_option(
-    "sqlalchemy.url", f'postgresql+psycopg2://{settings.Database_Username}:{settings.Database_Password}@{settings.Database_Hostname}:{settings.Database_Port}/{settings.Database_Name}')
+    "sqlalchemy.url", f"mssql+pyodbc://{settings.Database_Uid}:{settings.Database_Password}@{settings.Database_Server}:{settings.Database_Port}/APILearning?driver=SQL+Server+Native+Client+11.0")
+
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
