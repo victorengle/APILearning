@@ -1,5 +1,3 @@
-import urllib
-import pyodbc
 from psycopg2.extras import RealDictCursor
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -20,22 +18,9 @@ from .config import settings
 # engine = create_engine(SQLALCHEMY_DATABSE_URL)
 
 
-# connectn = pyodbc.connect(
-#     "mssql+pyodbc://Victor:Dontforget12@victor-apilearn:1433/APILearning?driver=ODBC+Driver+13+for+SQL+Server")
-# cursor = connectn.cursor()
-# cursor.execute("Select @@VERSION")
-# print(cursor)
+SQLALCHEMY_DATABSE_URL = f'postgresql+psycopg2://{settings.Database_Username}:{settings.Database_Password}@{settings.Database_Hostname}:{settings.Database_Port}/{settings.Database_Name}'
 
-# conn_str = urllib.parse.quote_plus(
-#     f"""Driver={f'{settings.Database_Driver}'};Server=tcp:{settings.Database_Server},1433;Database={settings.Database_Name};Uid={settings.Database_Uid};Pwd={settings.Database_Password};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;""")
-engine = create_engine(
-    f"mssql+pyodbc://{settings.Database_Uid}:{settings.Database_Password}@{settings.Database_Server}:{settings.Database_Port}/APILearning?driver=SQL+Server+Native+Client+11.0")
-
-# SQLALCHEMY_DATABSE_URL = 'mssql+pyodbc:///{}:{}@{}:{}/{}?Driver=SQL+Server'.format(
-#     config.settings.Database_Username, config.settings.Database_Password, config.settings.Database_Server, config.settings.Database_Port, config.settings.Database_Name)
-# SQLALCHEMY_DATABSE_URL = 'mssql+pyodbc:///odbc_connect={}'.format(conn_str)
-
-# engine = create_engine(SQLALCHEMY_DATABSE_URL)
+engine = create_engine(SQLALCHEMY_DATABSE_URL)
 
 
 # engine.execute("SELECT 1")
