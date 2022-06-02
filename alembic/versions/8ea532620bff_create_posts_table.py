@@ -18,8 +18,8 @@ depends_on = None
 
 
 def upgrade():
-    op.create_table('Posts', sa.Column('Id', sa.Integer(), nullable=False, primary_key=True),
-                    sa.Column('Title', sa.String(), nullable=False), sa.Column("Content", sa.String(), nullable=False), sa.Column('Published', sa.Boolean(), nullable=False))
+    op.create_table('posts', sa.Column('id', sa.Integer(), nullable=False,
+                    primary_key=True), sa.Column('title', sa.String(), nullable=False))
 
 
 def downgrade():

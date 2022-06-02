@@ -17,8 +17,11 @@ depends_on = None
 
 
 def upgrade():
-    op.add_column('Posts', sa.Column(
-        'Created_At', sa.DateTime(timezone=True), nullable=False, server_default=sa.text('GETDATE()')))
+    op.add_column('posts', sa.Column(
+        'published', sa.Boolean(), nullable=False, server_default='TRUE'),)
+    op.add_column('posts', sa.Column(
+        'created_at', sa.TIMESTAMP(timezone=True), nullable=False, server_default=sa.text('NOW()')),)
+    pass
 
 
 def downgrade():
