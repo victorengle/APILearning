@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     Database_Password: str
     Secret_Key: str
     Algorithm: str
-    Access_Token_Expire_Minutes: int
+    Access_Token_Expire_Minutes: str
 
     class Config:
         env_file = ".env"
