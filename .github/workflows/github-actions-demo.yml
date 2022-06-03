@@ -7,8 +7,8 @@ jobs:
     environment:
       name: Development
     env:
-      DATABASE_HOSTNAME: localhost
-      DATABASE_NAME: APILearning_Test
+      DATABASE_HOSTNAME: 213.52.10.106
+      DATABASE_NAME: APILearning
       DATABASE_USERNAME: postgres
       DATABASE_PORT: 5432
       DATABASE_PASSWORD: dontforget12
