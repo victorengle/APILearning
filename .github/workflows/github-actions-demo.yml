@@ -8,6 +8,5 @@ jobs:
     steps:
       - name: Check out repository code
       - uses: actions/checkout@v
-        name: List files in the repository
         run: echo "Hello Victor!"
         run : echo "Yo!"
