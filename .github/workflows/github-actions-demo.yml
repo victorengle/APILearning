@@ -13,6 +13,20 @@ jobs:
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.DATABASE_HOSTNAME}}
+    service:
+      postgres:
+        image: postgres
+          env:
+            DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+            POSTGRES_DB: ${{secrets.DATABASE_NAME}}
+          ports:
+          - 5432:5432
+          options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -28,4 +42,4 @@ jobs:
       - name: running pytest
         run: |
           install pytest
-          pytest APILearning\tests
+          pytest
