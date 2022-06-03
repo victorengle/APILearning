@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 
 # Commented code below Tells sqlalchemy to create whatever is in the models file if the table does not exist already
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
