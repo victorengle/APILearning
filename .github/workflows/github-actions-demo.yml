@@ -28,4 +28,4 @@ jobs:
       - name: running pytest
         run: |
           install pytest
-          pytest
+          pytest APILearning\tests
