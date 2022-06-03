@@ -13,7 +13,8 @@ jobs:
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.DATABASE_HOSTNAME}}
-    service:
+
+    services:
       postgres:
         image: postgres
         env:
