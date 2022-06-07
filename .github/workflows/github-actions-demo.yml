@@ -68,7 +68,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
+    environment:
+      name: Production
 
     steps:
-      - name: Deploying Stuff
-        run: echo "Deployment"
+      - name: Deploying To Ubuntu Prod
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USERNAME }}
+          password: ${{ secrets.PROD_PASSWORD }}
+          script: |
+            cd App/src
+            git pull origingithub
+            sudo systemctl restart APILearning
