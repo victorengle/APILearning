@@ -4,11 +4,11 @@ from app.config import settings
 import pytest
 
 
-def test_root(client):
-    res = client.get("/")
-    print(res.json().get('Message'))
-    assert res.json().get('Message') == 'Hello World!'
-    assert res.status_code == 200
+# def test_root(client):
+#     res = client.get("/")
+#     print(res.json().get('Message'))
+#     assert res.json().get('Message') == 'Hello World!'
+#     assert res.status_code == 200
 
 
 def test_create_user(client):
