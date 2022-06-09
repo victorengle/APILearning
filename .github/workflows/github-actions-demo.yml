@@ -79,3 +79,4 @@ jobs:
           known_hosts: "Placeholder"
       - name: Adding Known Hosts
         displayName: known_hosts
+        run: nano /home/Victor/.ssh/known_hosts
