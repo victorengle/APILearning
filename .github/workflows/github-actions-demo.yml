@@ -78,4 +78,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: cat /home/Victor/.ssh/known_hosts
       - name: Adding Known Hosts
-        run: print(cat /home/Victor/.ssh/known_hosts)
+        run: print(with.known_hosts)
