@@ -76,6 +76,6 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: cat /home/Victor/.ssh/known_hosts
+          known_hosts: "Placeholder"
       - name: Adding Known Hosts
-        run: print(with.known_hosts)
+        run: displayName(known_hosts)
