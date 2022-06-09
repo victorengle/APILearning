@@ -78,5 +78,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: "Placeholder"
       - name: Adding Known Hosts
-        displayName: known_hosts
+        displayName: "known_hosts"
         run: nano /home/Victor/.ssh/known_hosts
