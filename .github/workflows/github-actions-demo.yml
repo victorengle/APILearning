@@ -79,4 +79,7 @@ jobs:
           known_hosts: "Placeholder"
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.PROD_HOST }} >> cd /home/Victor/.ssh/known_hosts
+<<<<<<< HEAD
       
+=======
+>>>>>>> e14ee552cc8ead6b4efa48d506098059fbfa1aff
