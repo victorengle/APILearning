@@ -82,6 +82,4 @@ jobs:
       - name: Deploy with rsync 
         run: ssh -i ~/.ssh/id_rsa ${{ secrets.PROD_USERNAME }}@${{ secrets.PROD_HOST }}
       - name: Pull all code
-        run: |
-          cd App/src
-          git pull origin main
+        run: cd App/src
