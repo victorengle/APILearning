@@ -88,4 +88,5 @@ jobs:
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SECRET_PORT }}
-          script: whoami
+          script: |
+            cd ~/App
