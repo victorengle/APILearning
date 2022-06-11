@@ -79,3 +79,5 @@ jobs:
           known_hosts: "Placeholder"
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.PROD_HOST }} >> ~/.ssh/known_hosts
+      - name: Testing SSH into Server
+        run: ssh -i ~/.ssh/id_rsa Victor@52.148.212.213
