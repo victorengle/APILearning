@@ -92,3 +92,4 @@ jobs:
             cd ~/App/src
             git pull origin main
             sudo systemctl restart APILearning
+            whoami
