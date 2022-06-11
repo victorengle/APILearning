@@ -80,4 +80,4 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.PROD_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy with rsync 
-        run: rsync -av APILearning/ ${{ secrets.PROD_USERNAME }}@${{ secrets.PROD_HOST }}:/home/Victor/App/src
+        run: rsync -av -vv . ${{ secrets.PROD_USERNAME }}@${{ secrets.PROD_HOST }}:/home/Victor/App/src
