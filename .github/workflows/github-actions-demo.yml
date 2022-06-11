@@ -84,8 +84,8 @@ jobs:
       - name: Pull all code
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ PROD.HOST }}
-          username: ${{ PROD.USERNAME }}
+          host: ${{ PROD_HOST }}
+          username: ${{ PROD_USERNAME }}
           key: ${{ SSH_PRIVATE_KEY }}
-          port: ${{ SECRET.PORT }}
+          port: ${{ SECRET_PORT }}
           script: whoami
