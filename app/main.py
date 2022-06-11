@@ -35,4 +35,4 @@ app.include_router(votes.router)
 @app.get("/")
 def gethello():
     print("Yolo")
-    return {"Message": "Hello World! Changing App Message To See Chnages"}
+    return {"Message": "Seeing this message means CI/CD Is Completed"}

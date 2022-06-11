@@ -91,3 +91,4 @@ jobs:
           script: |
             cd ~/App/src
             git pull origin main
+            sudo systemctl restart APILearning
